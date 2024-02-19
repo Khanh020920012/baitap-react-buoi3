@@ -9,11 +9,12 @@ export default class List extends Component {
           data={item}
           key={item.id}
           handleClickView={this.props.handleViewDetail}
+          handleViewCard={this.props.handleAddToCard}
         />
       );
     });
   };
   render() {
-    return <div>{this.renderListShoe()}</div>;
+    return <div className="row col-7">{this.renderListShoe()}</div>;
   }
 }
