@@ -25,18 +25,14 @@ export default class Card extends Component {
                   </td>
                   <td>
                     <button
-                      onClick={() => {
-                        this.props.handleGiam(item.id);
-                      }}
+                     
                       className="btn btn-warning"
                     >
                       -
                     </button>
                     {item.amount}
                     <button
-                      onClick={() => {
-                        this.props.handleTang(item.id);
-                      }}
+                     
                       className=" btn btn-secondary"
                     >
                       +
