@@ -166,6 +166,7 @@ export default class Ex_Shoe extends Component {
     this.setState({ detail: shoe });
   };
   handleAddToCard = (shoe) => {
+    console.log(shoe);
     let cloneCard = [...this.state.card];
     let index = cloneCard.findIndex((item) => {
       return item.id == shoe.id;
@@ -178,12 +179,22 @@ export default class Ex_Shoe extends Component {
     }
     this.setState({ card: cloneCard });
   };
-  handleTang = () => {
-    this.setState({ amount: this.state.amount + 1 });
+  handleTang = (tang) => {
+    this.setState((tang) => ({
+      amount: tang.amount++,
+    }));
   };
 
-  handleGiam = (number) => {
-    this.setState({ amount: this.state.amount - number });
+  handleGiam = (giam) => {
+    if (this.state.amount > 0) {
+      this.setState((giam) => ({
+        amount: giam.amount - 1,
+      }));
+    }
+  };
+  handleDeleteItem = (id) => {
+    let updatedCard = this.state.card.filter((item) => item.id !== id);
+    this.setState({ card: updatedCard });
   };
   render() {
     return (
@@ -197,8 +208,10 @@ export default class Ex_Shoe extends Component {
           <Detail shoe={this.state.detail} />
           <Card
             card={this.state.card}
-            handleGiam={this.state.handleGiam}
-            handleTang={this.state.handleTang}
+            amount={this.state.amount}
+            handleTang={this.handleTang}
+            handleGiam={this.handleGiam}
+            handleDelete={this.handleDeleteItem}
           />
         </div>
       </div>

@@ -9,6 +9,7 @@ export default class Item extends Component {
         <h6>{name}</h6>
         <button
           onClick={() => {
+            console.log("first");
             this.props.handleViewCard(this.props.data);
           }}
           className="btn btn-dark"

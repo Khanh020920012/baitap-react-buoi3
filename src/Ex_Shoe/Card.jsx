@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 export default class Card extends Component {
   render() {
+    let { handleTang, handleGiam, handleDelete } = this.props;
     return (
       <div className="col-12">
         <table className="table">
@@ -24,15 +25,12 @@ export default class Card extends Component {
                     <strong> {item.price * item.amount}</strong>
                   </td>
                   <td>
-                    <button
-                     
-                      className="btn btn-warning"
-                    >
+                    <button onClick={handleGiam(1)} className="btn btn-warning">
                       -
                     </button>
                     {item.amount}
                     <button
-                     
+                      onClick={handleTang(1)}
                       className=" btn btn-secondary"
                     >
                       +
@@ -42,7 +40,9 @@ export default class Card extends Component {
                     <img src={item.image} alt="" width={100} />
                   </td>
                   <td>
-                    <button className="btn btn-danger">Delete</button>
+                    <button onClick={() => handleDelete(item.id)}>
+                      DELETE
+                    </button>
                   </td>
                 </tr>
               );
