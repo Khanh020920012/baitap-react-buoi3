@@ -2,7 +2,9 @@ import React, { Component } from "react";
 
 export default class Card extends Component {
   render() {
-    let { handleTang, handleGiam, handleDelete } = this.props;
+    const { handleAddAmount, handleMinusAmount, handleDelete, card } =
+      this.props;
+
     return (
       <div className="col-12">
         <table className="table">
@@ -25,12 +27,15 @@ export default class Card extends Component {
                     <strong> {item.price * item.amount}</strong>
                   </td>
                   <td>
-                    <button onClick={handleGiam(1)} className="btn btn-warning">
+                    <button
+                      onClick={() => handleMinusAmount(item)}
+                      className="btn btn-warning"
+                    >
                       -
                     </button>
                     {item.amount}
                     <button
-                      onClick={handleTang(1)}
+                      onClick={() => handleAddAmount(item)}
                       className=" btn btn-secondary"
                     >
                       +
@@ -40,7 +45,10 @@ export default class Card extends Component {
                     <img src={item.image} alt="" width={100} />
                   </td>
                   <td>
-                    <button onClick={() => handleDelete(item.id)}>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => handleDelete(item.id)}
+                    >
                       DELETE
                     </button>
                   </td>

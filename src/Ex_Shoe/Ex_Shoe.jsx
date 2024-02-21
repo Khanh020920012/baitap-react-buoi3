@@ -160,7 +160,6 @@ export default class Ex_Shoe extends Component {
       image: "http://svcy3.myclass.vn/images/adidas-prophere.png",
     },
     card: [],
-    amount: [],
   };
   handleChangeDetail = (shoe) => {
     this.setState({ detail: shoe });
@@ -179,17 +178,40 @@ export default class Ex_Shoe extends Component {
     }
     this.setState({ card: cloneCard });
   };
-  handleTang = (tang) => {
-    this.setState((tang) => ({
-      amount: tang.amount++,
-    }));
+  handleAddAmount = (shoe) => {
+    let cloneCard = [...this.state.card];
+    let index = cloneCard.findIndex((item) => {
+      return item.id === shoe.id;
+    });
+
+    if (index !== -1) {
+      if (cloneCard[index].hasOwnProperty("amount")) {
+        cloneCard[index].amount++;
+        this.setState({
+          card: cloneCard,
+        });
+      } else {
+        // Nếu không có thuộc tính 'amount', bạn có thể tạo nó ở đây hoặc xử lý tùy ý.
+        console.log("Không tìm thấy thuộc tính 'amount'");
+      }
+    }
   };
 
-  handleGiam = (giam) => {
-    if (this.state.amount > 0) {
-      this.setState((giam) => ({
-        amount: giam.amount - 1,
-      }));
+  handleMinusAmount = (shoe) => {
+    let cloneCard = [...this.state.card];
+    let index = cloneCard.findIndex((item) => {
+      return item.id === shoe.id;
+    });
+
+    if (index !== -1) {
+      if (cloneCard[index].amount === 0) {
+        cloneCard.splice(index, 1);
+      } else {
+        cloneCard[index].amount--;
+        this.setState({
+          card: cloneCard,
+        });
+      }
     }
   };
   handleDeleteItem = (id) => {
@@ -208,9 +230,8 @@ export default class Ex_Shoe extends Component {
           <Detail shoe={this.state.detail} />
           <Card
             card={this.state.card}
-            amount={this.state.amount}
-            handleTang={this.handleTang}
-            handleGiam={this.handleGiam}
+            handleAddAmount={this.handleAddAmount}
+            handleMinusAmount={this.handleMinusAmount}
             handleDelete={this.handleDeleteItem}
           />
         </div>
